@@ -2,14 +2,14 @@ pipeline {
     agent any
 
     environment {
-        MONGO_PASSWORD = credentials('my_secure_password') // Gunakan Jenkins Credentials untuk menyimpan password MongoDB secara aman
+        MONGO_PASSWORD = credentials('mongo_password') // Gunakan Jenkins Credentials untuk menyimpan password MongoDB secara aman
     }
 
     stages {
         stage('Clone Repository') {
             steps {
                 // Sesuaikan dengan repository Anda
-                git branch: "main", url: 'https://github.com/MadeDiksaPitra/App.git'
+                git 'https://github.com/username/your-repo.git'
             }
         }
 
@@ -87,9 +87,10 @@ pipeline {
 
     post {
         always {
-            // Cleanup resources after build
-            echo 'Cleaning up Docker resources...'
-            sh 'docker system prune -f'
+            node { // Pastikan node dijalankan sebelum cleanup
+                echo 'Cleaning up Docker resources...'
+                sh 'docker system prune -f'
+            }
         }
     }
 }

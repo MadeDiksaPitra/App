@@ -2,14 +2,14 @@ pipeline {
     agent any
 
     environment {
-        MONGO_PASSWORD = credentials('mongo_password') // Gunakan Jenkins Credentials untuk menyimpan password MongoDB secara aman
+        MONGO_PASSWORD = credentials('my_secure_password') // Gunakan Jenkins Credentials untuk menyimpan password MongoDB secara aman
     }
 
     stages {
         stage('Clone Repository') {
             steps {
                 // Sesuaikan dengan repository Anda
-                git 'https://github.com/username/your-repo.git'
+                git branch: "main", url: 'https://github.com/MadeDiksaPitra/App.git'
             }
         }
 

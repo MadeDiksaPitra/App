@@ -84,13 +84,4 @@ pipeline {
             }
         }
     }
-
-    post {
-        always {
-            node { // Pastikan node dijalankan sebelum cleanup
-                echo 'Cleaning up Docker resources...'
-                sh 'docker system prune -f'
-            }
-        }
-    }
 }
